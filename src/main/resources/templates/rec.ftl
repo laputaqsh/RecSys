@@ -43,13 +43,13 @@
                         </div>
                         <div class="col-md-6 column">
 
-                            <#list recs as recId>
+                            <#list recList as rec>
                                 <tr>
                                     <td>
-                                        <h2>${recId}</h2>
+                                        <h2>${rec.eventName}</h2>
                                     </td>
                                     <td>
-                                        <p>123</p>
+                                        <p>位置：${rec.regionId}<br/>时间：${rec.eventTime}</p>
                                     </td>
                                     <td>
                                         <p><a class="btn" href="#">查看详情 »</a></p>

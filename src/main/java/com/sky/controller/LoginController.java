@@ -74,6 +74,7 @@ public class LoginController {
         //设置到Cookie
         CookieUtil.set(response, CookieConstant.TOKEN, token, CookieConstant.EXPIRE);
 
+        map.put("userId", userForm.getUserId());
         return new ModelAndView("main");
     }
 

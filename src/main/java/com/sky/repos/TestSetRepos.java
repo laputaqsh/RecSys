@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public interface TestSetRepos {
@@ -13,7 +14,7 @@ public interface TestSetRepos {
     List<Integer> lists();
 
     @Select("select distinct event_id from test_set where group_id = #{groupId}")
-    List<Integer> findByGroupId(int groupId);
+    Set<Integer> findByGroupId(int groupId);
 
     @Insert("insert into test_set(group_id, event_id) values(#{groupId}, #{eventId})")
     void insert(int groupId, int eventId);

@@ -23,7 +23,7 @@
                                 </li>
                                 <li>
                                     <form class="navbar-form navbar-mid" method="post" action="/recsys/rec">
-                                        <input hidden type="number" name="groupId" value="3''}"/>
+                                        <input hidden type="number" name="userId" value="${userId}"/>
                                         <button type="submit" class="btn btn-default"
                                                 style="background-color: Transparent; border-style :none;">推荐
                                         </button>

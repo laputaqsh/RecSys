@@ -1,10 +1,14 @@
 package com.sky.repos;
 
+import com.sky.dao.GroupInfo;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public interface RecResRepos {
@@ -13,7 +17,7 @@ public interface RecResRepos {
     List<Integer> lists();
 
     @Select("select distinct event_id from rec_res where group_id = #{groupId}")
-    List<Integer> findByGroupId(int groupId);
+    Set<Integer> findByGroupId(int groupId);
 
     @Insert("insert into rec_res(group_id, event_id) values(#{groupId}, #{eventId})")
     void insert(int groupId, int eventId);
