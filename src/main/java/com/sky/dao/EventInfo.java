@@ -21,9 +21,11 @@ public class EventInfo {
 
     private int regionId;
 
-    private int eventTime;
+    private Date eventTime;
 
     private String eventName;
+
+    private String eventContent;
 
     @JsonSerialize(using = Date2LongSerializer.class)
     private Date createTime;
@@ -34,10 +36,11 @@ public class EventInfo {
     public EventInfo() {
     }
 
-    public EventInfo(int eventId, int regionId, int eventTime, String eventName) {
+    public EventInfo(int eventId, int regionId, Date eventTime, String eventName, String eventContent) {
         this.eventId = eventId;
         this.regionId = regionId;
         this.eventTime = eventTime;
         this.eventName = eventName;
+        this.eventContent = eventContent;
     }
 }

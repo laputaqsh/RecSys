@@ -1,9 +1,6 @@
 package com.sky.repos;
 
-import com.sky.dao.GroupInfo;
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 

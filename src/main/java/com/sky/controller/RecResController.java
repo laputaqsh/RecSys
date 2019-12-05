@@ -1,6 +1,7 @@
 package com.sky.controller;
 
 import com.sky.dao.EventInfo;
+import com.sky.dto.EventDTO;
 import com.sky.service.RecResService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +28,13 @@ public class RecResController {
     @PostMapping("/rec")
     public ModelAndView recs(@Valid Integer userId,
                              Map<String, Object> map) {
-        List<EventInfo> eventList = service.findByUserId(userId);
+        List<EventDTO> eventList = service.findByUserId(userId);
         Random random = new Random();
         Set<Integer> set = new HashSet<>();
         while (set.size() < 5) {
             set.add(random.nextInt(eventList.size()));
         }
-        List<EventInfo> recList = new ArrayList<>();
+        List<EventDTO> recList = new ArrayList<>();
         for (int i : set) {
             recList.add(eventList.get(i));
         }

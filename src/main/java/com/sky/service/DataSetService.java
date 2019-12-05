@@ -23,6 +23,7 @@ public class DataSetService {
     private EventRepos eventRepos;
     private RegionRepos regionRepos;
     private GroupUserRepos groupUserRepos;
+    private RecResRepos recResRepos;
 
     @Autowired
     public void setGroupUserRepos(GroupUserRepos groupUserRepos) {
@@ -32,6 +33,11 @@ public class DataSetService {
     @Autowired
     public void setTrainSetRepos(TrainSetRepos trainSetRepos) {
         this.trainSetRepos = trainSetRepos;
+    }
+
+    @Autowired
+    public void setRecResRepos(RecResRepos recResRepos) {
+        this.recResRepos = recResRepos;
     }
 
     @Autowired
@@ -60,20 +66,28 @@ public class DataSetService {
     }
 
     public void writeDataSet() {
-        String prefix = "D:/Documents/MyProjects/JavaProjects/RecAlg/dataset/meetup/";
+        /*String prefix = "D:/Documents/MyProjects/JavaProjects/RecAlg/dataset/meetup/";
         String trainFile = "train.csv";
         String testFile = "test.csv";
         String groupFile = "groups.csv";
         String eventFile = "events.csv";
         String regionFile = "locations.csv";
 
-        ArrayList<Integer>[] groups = readTrainOrTestOrGroup(prefix + groupFile);
+        ArrayList<Integer>[] groups = readTrainOrTestOrGroup(prefix + eventFile);
         assert groups != null;
         for (int g = 0; g < groups.length; g++) {
             for (int u : groups[g]) {
                 groupUserRepos.insert(g, u);
             }
+        }*/
+
+        List<Integer> set = recResRepos.lists();
+        set.sort(Comparator.naturalOrder());
+        log.info("Num: " + set.size());
+        for (int e : set) {
+            log.info("  " + e);
         }
+
     }
 
     private String[][] readRegion(String fileName) {

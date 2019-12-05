@@ -16,9 +16,10 @@ public interface EventRepos {
     @Select("select * from event_info where event_id = #{eventId}")
     @Results({
             @Result(column = "event_id", property = "eventId"),
+            @Result(column = "event_name", property = "eventName"),
             @Result(column = "region_id", property = "regionId"),
             @Result(column = "event_time", property = "eventTime"),
-            @Result(column = "event_name", property = "eventName"),
+            @Result(column = "event_content", property = "eventContent"),
             @Result(column = "create_time", property = "createTime"),
             @Result(column = "update_time", property = "updateTime")
     })

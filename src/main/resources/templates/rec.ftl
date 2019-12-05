@@ -19,7 +19,7 @@
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
                                 <li>
-                                    <a href="/recsys/index">主页</a>
+                                    <a href="/recsys/main">主页</a>
                                 </li>
                                 <li class="active" style="pointer-events: none;">
                                     <a href="/recsys/recs">推荐</a>
@@ -46,10 +46,10 @@
                             <#list recList as rec>
                                 <tr>
                                     <td>
-                                        <h2>${rec.eventName}</h2>
+                                        <h3>${rec.eventName}</h3>
                                     </td>
                                     <td>
-                                        <p>位置：${rec.regionId}<br/>时间：${rec.eventTime}</p>
+                                        <p>${rec.eventContent}</p>
                                     </td>
                                     <td>
                                         <p><a class="btn" href="#">查看详情 »</a></p>
