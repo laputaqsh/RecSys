@@ -18,10 +18,10 @@
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
-                                <li class="active">
-                                    <a href="/recsys/index">主页</a>
-                                </li>
                                 <li>
+                                    <a href="/recsys/main">主页</a>
+                                </li>
+                                <li class="active">
                                     <a href="/recsys/event/list">活动</a>
                                 </li>
                                 <li>
@@ -35,27 +35,11 @@
                                 </div>
                                 <button type="submit" class="btn btn-default">搜索</button>
                             </form>
-
                             <ul class="nav navbar-nav navbar-right">
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">我的<strong
-                                                class="caret"></strong></a>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <a href="#">我创建的活动</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">我加入的群组</a>
-                                        </li>
-                                        <li class="divider">
-                                        </li>
-                                        <li>
-                                            <a href="/recsys/logout"><font color="red">退出登录</font></a>
-                                        </li>
-                                    </ul>
+                                <li>
+                                    <a href="/recsys/logout">登出</a>
                                 </li>
                             </ul>
-
                         </div>
                     </nav>
                     <div class="row clearfix">
@@ -63,20 +47,15 @@
                         </div>
                         <div class="col-md-6 column">
 
-                            <#list recList as rec>
-                                <tr>
-                                    <td>
-                                        <h3>${rec.eventName}</h3>
-                                    </td>
-                                    <td>
-                                        <p>${rec.eventContent}</p>
-                                    </td>
-                                    <td>
-                                        <a style="text-align:right;"
-                                           href="/recsys/event/detail?eventId=${rec.eventId}">查看详情 ></a>
-                                    </td>
-                                </tr>
-                            </#list>
+                            <h2>${event.eventName}</h2>
+                            <p>
+                                &nbsp;&nbsp;主办：${event.hostName}<br/>
+                                &nbsp;&nbsp;时间：${event.eventTime}<br/>
+                                &nbsp;&nbsp;地点：${event.eventRegion}<br/><br/>
+                                内容：<br/>${event.eventContent}<br/><br/>
+                                <input type="button" value="参加活动"
+                                       onclick="javascript:{this.disabled=true;this.value='参加成功';}">
+                            </p>
 
                         </div>
                         <div class="col-md-4 column">

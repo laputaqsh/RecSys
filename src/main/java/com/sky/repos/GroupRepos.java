@@ -7,11 +7,23 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Set;
+
 @Repository
 public interface GroupRepos {
 
     @Select("select count(*) from group_info")
     int counts();
+
+    @Select("select distinct * from group_info")
+    @Results({
+            @Result(column = "group_id", property = "groupId"),
+            @Result(column = "group_name", property = "groupName"),
+            @Result(column = "create_time", property = "createTime"),
+            @Result(column = "update_time", property = "updateTime")
+    })
+    Set<GroupInfo> lists();
 
     @Select("select * from group_info where group_id = #{groupId}")
     @Results({

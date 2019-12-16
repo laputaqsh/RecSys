@@ -11,7 +11,7 @@ import java.sql.Date;
 @Data
 public class EventDTO {
 
-    private int eventId;
+    private String eventId;
 
     private String hostName;
 
@@ -22,4 +22,8 @@ public class EventDTO {
     private String eventRegion;
 
     private String eventContent;
+
+    private double eventPM;
+
+    private double eventRS;
 }

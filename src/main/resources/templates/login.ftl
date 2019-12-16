@@ -19,13 +19,16 @@
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
                                 <li class="active">
-                                    <a href="/recsys/index">主页</a>
+                                    <a href="/recsys">主页</a>
                                 </li>
                                 <li>
                                     <a href="/recsys/event/list">活动</a>
                                 </li>
                                 <li>
                                     <a href="/recsys/group/list">群组</a>
+                                </li>
+                                <li>
+                                    <a href="/recsys/rank">排行</a>
                                 </li>
                             </ul>
                             <form class="navbar-form navbar-left" role="search" method="post"
@@ -36,50 +39,44 @@
                                 <button type="submit" class="btn btn-default">搜索</button>
                             </form>
 
-                            <ul class="nav navbar-nav navbar-right">
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">我的<strong
-                                                class="caret"></strong></a>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <a href="#">我创建的活动</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">我加入的群组</a>
-                                        </li>
-                                        <li class="divider">
-                                        </li>
-                                        <li>
-                                            <a href="/recsys/logout"><font color="red">退出登录</font></a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-
                         </div>
                     </nav>
                     <div class="row clearfix">
-                        <div class="col-md-2 column">
-                        </div>
-                        <div class="col-md-6 column">
-
-                            <#list recList as rec>
-                                <tr>
-                                    <td>
-                                        <h3>${rec.eventName}</h3>
-                                    </td>
-                                    <td>
-                                        <p>${rec.eventContent}</p>
-                                    </td>
-                                    <td>
-                                        <a style="text-align:right;"
-                                           href="/recsys/event/detail?eventId=${rec.eventId}">查看详情 ></a>
-                                    </td>
-                                </tr>
-                            </#list>
-
+                        <div class="col-md-8 column">
+                            <div class="jumbotron">
+                                <h1>
+                                    Join us!
+                                </h1>
+                                <p>
+                                    This is a template for a simple marketing or informational website. It includes a
+                                    large callout called the hero unit and three supporting pieces of content. Use it as
+                                    a starting point to create something more unique.
+                                </p>
+                                <p>
+                                    <a class="btn btn-primary btn-large" href="#">Learn more</a>
+                                </p>
+                            </div>
                         </div>
                         <div class="col-md-4 column">
+                            <form role="form" method="post" action="/recsys/login">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">用户名</label>
+                                    <input name="userId"
+                                           type="text"
+                                           class="form-control"
+                                           id="exampleInputEmail1"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">密码</label>
+                                    <input name="userPw" type="password"
+                                           class="form-control"
+                                           id="exampleInputPassword1"/>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox"/>记住我</label>
+                                </div>
+                                <button type="submit" class="btn btn-default">登录</button>
+                            </form>
                         </div>
                     </div>
                 </div>

@@ -81,7 +81,7 @@ public class DataSetService {
             }
         }*/
 
-        List<Integer> set = recResRepos.lists();
+        List<Integer> set = new ArrayList<>(recResRepos.lists());
         set.sort(Comparator.naturalOrder());
         log.info("Num: " + set.size());
         for (int e : set) {

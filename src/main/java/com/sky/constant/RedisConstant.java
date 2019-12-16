@@ -2,6 +2,6 @@ package com.sky.constant;
 
 public interface RedisConstant {
 
-    String TOKEN_PREFIX = "token_%s";
-    Integer EXPIRE = 7200;  //2小时
+    String PREFIX = CookieConstant.TOKEN.concat("_%s");
+    Integer EXPIRE = CookieConstant.EXPIRE;  //2小时
 }

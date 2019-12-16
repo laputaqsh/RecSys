@@ -29,9 +29,4 @@ public class GroupInfo {
 
     public GroupInfo() {
     }
-
-    public GroupInfo(int groupId, String groupName) {
-        this.groupId = groupId;
-        this.groupName = groupName;
-    }
 }

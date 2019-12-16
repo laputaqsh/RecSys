@@ -4,14 +4,13 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Set;
 
 @Repository
 public interface RecResRepos {
 
     @Select("select distinct event_id from rec_res")
-    List<Integer> lists();
+    Set<Integer> lists();
 
     @Select("select distinct event_id from rec_res where group_id = #{groupId}")
     Set<Integer> findByGroupId(int groupId);

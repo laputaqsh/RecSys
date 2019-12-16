@@ -1,16 +1,16 @@
 package com.sky.controller;
 
-import com.sky.dao.EventInfo;
 import com.sky.dto.EventDTO;
 import com.sky.service.RecResService;
+import com.sky.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
+import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 @RestController
@@ -18,17 +18,23 @@ import java.util.*;
 @Slf4j
 public class RecResController {
 
-    private RecResService service;
+    private UserService userService;
+    private RecResService recResService;
 
     @Autowired
-    public void setService(RecResService service) {
-        this.service = service;
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 
-    @PostMapping("/rec")
-    public ModelAndView recs(@Valid Integer userId,
-                             Map<String, Object> map) {
-        List<EventDTO> eventList = service.findByUserId(userId);
+    @Autowired
+    public void setRecResService(RecResService recResService) {
+        this.recResService = recResService;
+    }
+
+    @GetMapping("/index")
+    public ModelAndView index(HttpServletRequest request, Map<String, Object> map) {
+        int userId = userService.getUserId(request);
+        List<EventDTO> eventList = recResService.findByUserId(userId);
         Random random = new Random();
         Set<Integer> set = new HashSet<>();
         while (set.size() < 5) {
@@ -39,6 +45,6 @@ public class RecResController {
             recList.add(eventList.get(i));
         }
         map.put("recList", recList);
-        return new ModelAndView("rec", map);
+        return new ModelAndView("index", map);
     }
 }

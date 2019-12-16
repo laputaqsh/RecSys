@@ -1,8 +1,7 @@
 package com.sky.aspect;
 
-import com.sky.constant.CookieConstant;
 import com.sky.constant.RedisConstant;
-import com.sky.exception.SellerAuthorizeException;
+import com.sky.exception.AuthorizeException;
 import com.sky.utils.CookieUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.annotation.Aspect;
@@ -41,17 +40,17 @@ public class AuthorizeAspect {
         HttpServletRequest request = attributes.getRequest();
 
         //查Cookie
-        Cookie cookie = CookieUtil.get(request, CookieConstant.TOKEN);
+        Cookie cookie = CookieUtil.get(request);
         if (cookie == null) {
             log.warn("【登录校验】Cookie中查不到token");
-            throw new SellerAuthorizeException();
+            throw new AuthorizeException();
         }
 
         //查Redis
-        String tokenValue = redisTemplate.opsForValue().get(String.format(RedisConstant.TOKEN_PREFIX, cookie.getValue()));
+        String tokenValue = redisTemplate.opsForValue().get(String.format(RedisConstant.PREFIX, cookie.getValue()));
         if (StringUtils.isEmpty(tokenValue)) {
             log.warn("【登录校验】Redis中查不到token");
-            throw new SellerAuthorizeException();
+            throw new AuthorizeException();
         }
     }
 }

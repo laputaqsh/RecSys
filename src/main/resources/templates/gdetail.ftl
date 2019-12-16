@@ -18,13 +18,13 @@
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
-                                <li class="active">
+                                <li>
                                     <a href="/recsys/index">主页</a>
                                 </li>
                                 <li>
                                     <a href="/recsys/event/list">活动</a>
                                 </li>
-                                <li>
+                                <li class="active">
                                     <a href="/recsys/group/list">群组</a>
                                 </li>
                             </ul>
@@ -63,20 +63,17 @@
                         </div>
                         <div class="col-md-6 column">
 
-                            <#list recList as rec>
-                                <tr>
-                                    <td>
-                                        <h3>${rec.eventName}</h3>
-                                    </td>
-                                    <td>
-                                        <p>${rec.eventContent}</p>
-                                    </td>
-                                    <td>
-                                        <a style="text-align:right;"
-                                           href="/recsys/event/detail?eventId=${rec.eventId}">查看详情 ></a>
-                                    </td>
-                                </tr>
-                            </#list>
+                            <h2>${group.groupName}</h2>
+                            <p>
+                                &nbsp;&nbsp;创建人：${group.hostName}<br/>
+                                &nbsp;&nbsp;地点：${group.groupRegion}<br/>
+                                &nbsp;&nbsp;详情：<br/>
+                                &nbsp;&nbsp;欢迎大家加入我们的滑雪小分队！<br/>
+                                &nbsp;&nbsp;希望大家多多组织滑雪活动，滑雪的时候一定要吆喝一声哦~<br/>
+                                &nbsp;&nbsp;另外，滑雪时请注意戴好装备，多加注意安全！祝大家玩的开心！<br/><br/>
+                                <input type="button" value="加入群组"
+                                       onclick="javascript:{this.disabled=true;this.value='加入成功';}">
+                            </p>
 
                         </div>
                         <div class="col-md-4 column">

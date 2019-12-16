@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 @Data
 public class UserForm {
 
-    private String userId;
+    private int userId;
 
     private String userPw;
 

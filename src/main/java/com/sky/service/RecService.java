@@ -85,7 +85,7 @@ public class RecService {
 
     private int[][] recommend(Model model, int topn) {
         System.out.println("making rec...");
-        List<Integer> candlist = testSetRepos.lists();
+        List<Integer> candlist = new ArrayList<>(testSetRepos.lists());
         double[][] scores = new double[model.G][candlist.size()];
         int[][] reclist = new int[model.G][topn];
         double su, sr, s;

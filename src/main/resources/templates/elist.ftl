@@ -18,10 +18,10 @@
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
-                                <li class="active">
+                                <li>
                                     <a href="/recsys/index">主页</a>
                                 </li>
-                                <li>
+                                <li class="active">
                                     <a href="/recsys/event/list">活动</a>
                                 </li>
                                 <li>
@@ -63,24 +63,52 @@
                         </div>
                         <div class="col-md-6 column">
 
-                            <#list recList as rec>
+                            <#list eventPage.content as event>
+
                                 <tr>
                                     <td>
-                                        <h3>${rec.eventName}</h3>
+                                        <h3>${event.eventName}</h3>
                                     </td>
                                     <td>
-                                        <p>${rec.eventContent}</p>
+                                        <p>${event.eventContent}</p>
                                     </td>
                                     <td>
                                         <a style="text-align:right;"
-                                           href="/recsys/event/detail?eventId=${rec.eventId}">查看详情 ></a>
+                                           href="/recsys/event/detail?eventId=${event.eventId}">查看详情 ></a>
                                     </td>
                                 </tr>
+
                             </#list>
 
+                            <ul class="pagination pull-right">
+                                <li><a href="#">举办</a></li>
+                                <li><a href="/recsys/event/list?page=1&size=${size}">首页</a></li>
+                                <#if page lte 1>
+                                    <li class="disabled"><a href="#">上一页</a></li>
+                                <#else>
+                                    <li><a href="/recsys/event/list?page=${page - 1}&size=${size}">上一页</a></li>
+                                </#if>
+
+                                <#list 1..eventPage.getTotalPages() as index>
+                                    <#if page == index>
+                                        <li class="disabled"><a href="#">${index}</a></li>
+                                    <#else>
+                                        <li><a href="/recsys/event/list?page=${index}&size=${size}">${index}</a></li>
+                                    </#if>
+                                </#list>
+
+                                <#if page gte eventPage.getTotalPages()>
+                                    <li class="disabled"><a href="#">下一页</a></li>
+                                <#else>
+                                    <li><a href="/recsys/event/list?page=${page + 1}&size=${size}">下一页</a></li>
+                                </#if>
+                                <li><a href="/recsys/event/list?page=${eventPage.getTotalPages()}&size=${size}">尾页</a>
+                                </li>
+                            </ul>
                         </div>
-                        <div class="col-md-4 column">
-                        </div>
+
+                    </div>
+                    <div class="col-md-4 column">
                     </div>
                 </div>
             </div>
