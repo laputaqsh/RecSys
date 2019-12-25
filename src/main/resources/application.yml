@@ -5,22 +5,22 @@ spring:
     show-sql: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.139.128/recsys?characterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://182.92.85.86/douban_bj2019?useUnicode=true&characterEncoding=utf-8
     username: root
-    password: 123456
+    password: 3210
+    tomcat:
+      initSQL: SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci
   jackson:
     default-property-inclusion: non_null  #使返回的Json数据不包含null值
   redis:
-    host: 192.168.139.128
+    host: 182.92.85.86
     port: 6379
   main:
     allow-bean-definition-overriding: true
 
 server:
   servlet:
-    context-path: /recsys
-logging:
-  level:
-    com.sky.dataobject.mapper.ProductCategoryMapper: trace
-mybatis:
-  mapper-locations: classpath:mapper/*.xml
+    context-path: /
+#logging:
+#  level:
+#    com.sky.repos: debug
