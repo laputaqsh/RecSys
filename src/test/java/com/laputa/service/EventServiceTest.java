@@ -19,9 +19,4 @@ public class EventServiceTest {
         this.eventService = eventService;
     }
 
-
-    @Test
-    public void test() {
-        eventService.cleanDataset();
-    }
 }

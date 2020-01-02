@@ -22,9 +22,19 @@ public class EventController {
 
     @GetMapping("/list")
     public List<Event> list(@RequestParam(value = "locId", defaultValue = "108288") Integer locId,
+            @RequestParam(value = "type", defaultValue = "全部") String type,
+            @RequestParam(value = "date", defaultValue = "未来") String date,
+            @RequestParam(value = "loca", defaultValue = "全部") String loca,
             @RequestParam(value = "start", defaultValue = "0") Integer start,
-                                         @RequestParam(value = "count", defaultValue = "50") Integer count) {
-        return eventService.lists(locId, start, count);
+            @RequestParam(value = "count", defaultValue = "50") Integer count) {
+        List<Event> eventList = eventService.lists(start, count);
+        List<Event> res = new ArrayList<>();
+        for (Event item : eventList) {
+            if (type.equals("全部") || type.equals(item.getCategory())) {
+                res.add(item);
+            }
+        }
+        return res;
     }
 
     @GetMapping("/detail")
@@ -32,19 +42,23 @@ public class EventController {
         return eventService.findById(id);
     }
 
-    /*@GetMapping("/recs")
-    public ResultVO recs(@RequestParam(value = "userId", defaultValue = "") String userId) {
-        List<Event> eventList = eventService.lists();
+    @GetMapping("/hots")
+    public List<Event> hots(@RequestParam(value = "limit", defaultValue = "10") Integer limit) {
+        return eventService.popular(limit);
+    }
+
+    @GetMapping("/recs")
+    public List<Event> recs(@RequestParam(value = "userId", defaultValue = "1015534") Integer id) { 
+        List<Event> eventList = eventService.lists(0, 300);
         Random random = new Random();
         Set<Integer> set = new HashSet<>();
-        while (set.size() < 5) {
+        while (set.size() < 10) {
             set.add(random.nextInt(eventList.size()));
         }
         List<Event> recList = new ArrayList<>();
         for (int i : set) {
             recList.add(eventList.get(i));
         }
-
-        return ResultUtil.success(recList);
-    }*/
+        return recList;
+    }
 }

@@ -12,7 +12,7 @@
     <artifactId>recsys</artifactId>
     <version>1.0</version>
     <name>recsys</name>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <description>RecSys</description>
 
     <properties>
@@ -47,11 +47,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.61</version>
@@ -78,6 +73,29 @@
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>1.2.0</version>
         </dependency>
+    
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>4.3.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib</artifactId>
+            <version>1.3.61</version>
+        </dependency>
+    
     </dependencies>
+
+    <!-- <build>
+        <finalName>RecSys</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build> -->
 
 </project>

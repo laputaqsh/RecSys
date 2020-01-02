@@ -15,6 +15,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -68,6 +69,18 @@ public class UserService {
             //清除Cookie
             CookieUtil.set(response, null, 0);
         }
+    }
+
+    public User findById(int userId) {
+        return userRepos.findById(userId);
+    }
+
+    public List<Integer> getFols(int userId) {
+        return userRepos.findFols(userId);
+    }
+
+    public List<Integer> getFans(int userId) {
+        return userRepos.findFans(userId);
     }
 
 }

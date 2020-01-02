@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - RecApplication",
+            "request": "launch",
+            "mainClass": "com.laputa.RecApplication",
+            "projectName": "recsys"
+        }
+    ]
+}

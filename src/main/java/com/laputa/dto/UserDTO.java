@@ -1,9 +1,8 @@
 package com.laputa.dto;
 
 import lombok.Data;
-
-import java.util.ArrayList;
 import java.util.List;
+import com.laputa.dao.User;
 
 /**
  * 用于数据传输
@@ -12,16 +11,22 @@ import java.util.List;
 @Data
 public class UserDTO {
 
-    private String userId;
+    private int id;
 
-    private String userPw;
+    private String uid;
 
-    private String userName;
+    private String name;
 
-    private String userContent;
+    private String type;
 
-    private String userRegionId;
+    private String avatar;
 
-    private List<EventDTO> userPastEventList = new ArrayList<>();
+    private String largeAvatar;
+
+    private String alt;
+
+    private List<Integer> fols;
+
+    private List<Integer> fans;
 
 }

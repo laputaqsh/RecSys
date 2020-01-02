@@ -3,7 +3,7 @@ package com.laputa.enums;
 import lombok.Getter;
 
 @Getter
-public enum ResultEnum implements SuperEnum {
+public enum ResultEnum {
     SUCCESS(200, "成功"),
     FAILURE(400, "失败");
 

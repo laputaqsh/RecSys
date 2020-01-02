@@ -19,8 +19,12 @@ public class EventService {
         this.eventRepos = eventRepos;
     }
 
-    public List<Event> lists(int locId, int start, int count) {
-        return eventRepos.lists(locId, start, count);
+    public int counts() {
+        return eventRepos.counts();
+    }
+
+    public List<Event> lists(int start, int count) {
+        return eventRepos.lists(start, count);
     }
 
     public Event findById(int id) {
@@ -31,18 +35,12 @@ public class EventService {
         return eventRepos.search(searchContent);
     }
 
-    public void cleanDataset() {
-        List<Event> eventList = eventRepos.lists(108288, 0, eventRepos.counts());
-        for (Event item : eventList) {
-            eventRepos.updateContentById(item.getId(), transfer(item.getContent()));
-        }
+    public List<Event> findByCategory(String category) {
+        return eventRepos.findByCategory(category);
     }
 
-    private String transfer(String content) {
-        return content.replaceAll("<div class=\"middle\">", "")
-                .replaceAll("</div>", "")
-                .replaceAll("<span class=\"pic-title\"></span>", "")
-                .replaceAll("img ", "img width=\"100%\" ");
+    public List<Event> popular(int limit) {
+        return eventRepos.popular(limit);
     }
 
 }
