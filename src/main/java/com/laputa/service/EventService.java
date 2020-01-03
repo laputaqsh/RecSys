@@ -23,6 +23,10 @@ public class EventService {
         return eventRepos.counts();
     }
 
+    public void update(int id, String content) {
+        eventRepos.updateContentById(id, content);
+    }
+
     public List<Event> lists(int start, int count) {
         return eventRepos.lists(start, count);
     }

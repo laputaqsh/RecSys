@@ -1,8 +1,6 @@
 package com.laputa.dto;
 
 import lombok.Data;
-import java.util.List;
-import com.laputa.dao.User;
 
 /**
  * 用于数据传输
@@ -25,8 +23,8 @@ public class UserDTO {
 
     private String alt;
 
-    private List<Integer> fols;
+    private int fols;
 
-    private List<Integer> fans;
+    private int fans;
 
 }

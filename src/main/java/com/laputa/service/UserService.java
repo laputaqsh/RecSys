@@ -75,11 +75,19 @@ public class UserService {
         return userRepos.findById(userId);
     }
 
-    public List<Integer> getFols(int userId) {
+    public int countFols(int userId) {
+        return userRepos.countFols(userId);
+    }
+
+    public int countFans(int userId) {
+        return userRepos.countFans(userId);
+    }
+
+    public List<User> getFols(int userId) {
         return userRepos.findFols(userId);
     }
 
-    public List<Integer> getFans(int userId) {
+    public List<User> getFans(int userId) {
         return userRepos.findFans(userId);
     }
 

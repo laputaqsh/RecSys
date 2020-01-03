@@ -1,14 +1,10 @@
 package com.laputa.controller;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-
 import com.laputa.constant.ProjectConstant;
 import com.laputa.dao.User;
 import com.laputa.dto.UserDTO;
 import com.laputa.enums.ResultEnum;
-import com.laputa.service.EventService;
 import com.laputa.service.UserService;
 import com.laputa.utils.ResultUtil;
 import com.laputa.vo.ResultVO;
@@ -16,10 +12,12 @@ import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -28,16 +26,9 @@ public class UserController {
 
     private UserService userService;
 
-    private EventService eventService;
-
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
-    }
-
-    @Autowired
-    public void setEventService(EventService eventService) {
-        this.eventService = eventService;
     }
 
     @PostMapping("/login")
@@ -46,14 +37,30 @@ public class UserController {
         if (user == null) {
             return ResultUtil.failure(ResultEnum.FAILURE);
         }
-        List<Integer> fols = userService.getFols(userId);
-        List<Integer> fans = userService.getFans(userId);
         
         UserDTO userDTO = new UserDTO();
         BeanUtils.copyProperties(user, userDTO);
-        userDTO.setFols(fols);
-        userDTO.setFans(fans);
+        userDTO.setFols(userService.countFols(userId));
+        userDTO.setFans(userService.countFans(userId));
         return ResultUtil.success(userDTO);
+    }
+
+    @GetMapping("/fols")
+    public ResultVO fols(@RequestParam("userId") Integer userId) {
+        List<User> users = userService.getFols(userId);
+        if (users == null) {
+            return ResultUtil.failure(ResultEnum.FAILURE);
+        }
+        return ResultUtil.success(users);
+    }
+
+    @GetMapping("/fans")
+    public ResultVO fans(@RequestParam("userId") Integer userId) {
+        List<User> users = userService.getFans(userId);
+        if (users == null) {
+            return ResultUtil.failure(ResultEnum.FAILURE);
+        }
+        return ResultUtil.success(users);
     }
     
     // @GetMapping("/auth")
