@@ -14,6 +14,7 @@ import com.laputa.dao.*;
 @RunWith(SpringRunner.class)
 public class EventServiceTest {
 
+
     private EventService eventService;
 
     @Autowired
@@ -23,13 +24,8 @@ public class EventServiceTest {
 
     @Test
     public void update() {
-        List<Event> events = eventService.lists(0, eventService.counts());
-        for (Event event : events) {
-            String content = event.getContent();
-            String res = content.replaceAll("width=\"100%\" width=\"100%\" width=\"100%\" width=\"100%\"",
-                    "width=\"100%\"");
-            eventService.update(event.getId(), res);
-        }
+        List<Event> events = eventService.search("方特");
+        log.info(""+events.size());
     }
 
 }

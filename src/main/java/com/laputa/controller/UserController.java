@@ -3,6 +3,7 @@ package com.laputa.controller;
 import java.io.IOException;
 import com.laputa.constant.ProjectConstant;
 import com.laputa.dao.User;
+import com.laputa.dao.Event;
 import com.laputa.dto.UserDTO;
 import com.laputa.enums.ResultEnum;
 import com.laputa.service.UserService;
@@ -45,6 +46,14 @@ public class UserController {
         return ResultUtil.success(userDTO);
     }
 
+    @PostMapping("/regist")
+    public ResultVO regist(@RequestParam("userId") Integer userId, @RequestParam("userPw") String userPw) {
+        if (userService.findById(userId) != null) {
+            return ResultUtil.failure(ResultEnum.FAILURE);
+        }
+        return ResultUtil.success();
+    }
+
     @GetMapping("/fols")
     public ResultVO fols(@RequestParam("userId") Integer userId) {
         List<User> users = userService.getFols(userId);
@@ -61,6 +70,24 @@ public class UserController {
             return ResultUtil.failure(ResultEnum.FAILURE);
         }
         return ResultUtil.success(users);
+    }
+
+    @GetMapping("/collects")
+    public ResultVO collects(@RequestParam("userId") Integer userId) {
+        List<Event> events = userService.getCollects(userId);
+        if (events == null) {
+            return ResultUtil.failure(ResultEnum.FAILURE);
+        }
+        return ResultUtil.success(events);
+    }
+
+    @GetMapping("/history")
+    public ResultVO history(@RequestParam("userId") Integer userId) {
+        List<Event> events = userService.getHistory(userId);
+        if (events == null) {
+            return ResultUtil.failure(ResultEnum.FAILURE);
+        }
+        return ResultUtil.success(events);
     }
     
     // @GetMapping("/auth")

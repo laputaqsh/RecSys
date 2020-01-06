@@ -6,6 +6,7 @@ import com.laputa.dao.User;
 import com.laputa.exception.AuthorizeException;
 import com.laputa.utils.CookieUtil;
 import com.laputa.repos.UserRepos;
+import com.laputa.dao.Event;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -15,6 +16,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -89,6 +91,16 @@ public class UserService {
 
     public List<User> getFans(int userId) {
         return userRepos.findFans(userId);
+    }
+
+    public List<Event> getCollects(int userId) {
+        return userRepos.findEvents("wisher", userId);
+    }
+
+    public List<Event> getHistory(int userId) {
+        List<Event> res = userRepos.findEvents("participant", userId);
+        res.addAll(userRepos.findEvents("owner", userId));
+        return res;
     }
 
 }

@@ -35,8 +35,9 @@ public class EventService {
         return eventRepos.findById(id);
     }
 
-    public Set<Integer> search(String searchContent) {
-        return eventRepos.search(searchContent);
+    public List<Event> search(String keyWord) {
+        List<Event> res = eventRepos.search(keyWord);
+        return res;
     }
 
     public List<Event> findByCategory(String category) {
