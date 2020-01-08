@@ -3,8 +3,8 @@ package com.laputa.dao;
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 @Data
@@ -17,7 +17,5 @@ public class EventUser {
     private int eventId;
 
     private int userId;
-
-    private String userType;
 
 }

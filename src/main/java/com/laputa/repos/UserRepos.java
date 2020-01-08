@@ -29,6 +29,14 @@ public interface UserRepos {
                         @Result(column = "alt", property = "alt") })
         User findById(int userId);
 
+        @Select("select * from user where id >= (select id from user limit #{start}, 1) limit #{count}")
+        @Results({ @Result(column = "id", property = "id"), @Result(column = "uid", property = "uid"),
+                        @Result(column = "name", property = "name"), @Result(column = "type", property = "type"),
+                        @Result(column = "avatar", property = "avatar"),
+                        @Result(column = "large_avatar", property = "largeAvatar"),
+                        @Result(column = "alt", property = "alt") })
+        List<User> lists(int start, int count);
+
         @Select("select * from user where id in (select related_user as id from relation where user_id = #{userId})")
         @Results({ @Result(column = "id", property = "id"), @Result(column = "uid", property = "uid"),
                         @Result(column = "name", property = "name"), @Result(column = "type", property = "type"),

@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 
 @Service
 @Slf4j
-public class UserService {
+public class RecService {
 
     private UserRepos userRepos;
 
@@ -71,10 +71,6 @@ public class UserService {
             //清除Cookie
             CookieUtil.set(response, null, 0);
         }
-    }
-
-    public List<User> lists() {
-        return userRepos.lists(0, userRepos.counts());
     }
 
     public User findById(int userId) {

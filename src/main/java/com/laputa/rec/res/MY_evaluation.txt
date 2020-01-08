@@ -1,0 +1,6 @@
+topn=10
+hit=86
+sum=327
+Precision=0.4300%
+Recall=0.2630%
+F1-Measure=0.3264%
