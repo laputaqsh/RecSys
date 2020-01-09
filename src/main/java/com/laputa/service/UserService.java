@@ -74,7 +74,7 @@ public class UserService {
     }
 
     public List<User> lists() {
-        return userRepos.lists(0, userRepos.counts());
+        return userRepos.lists();
     }
 
     public User findById(int userId) {
@@ -87,10 +87,6 @@ public class UserService {
 
     public int countFans(int userId) {
         return userRepos.countFans(userId);
-    }
-
-    public List<User> lists(int start, int count) {
-        return userRepos.lists(start, count);
     }
 
     public List<User> getFols(int userId) {

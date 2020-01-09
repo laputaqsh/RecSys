@@ -34,7 +34,7 @@ public class BackUserController {
     public ModelAndView list(@RequestParam(value = "page", defaultValue = "1") Integer page,
             @RequestParam(value = "size", defaultValue = "10") Integer size, HttpServletRequest request,
             Map<String, Object> map) {
-        List<User> userList = userService.lists(0, 100);
+        List<User> userList = userService.lists();
         List<UserDTO> userDTOList = new ArrayList<>();
         for (User user : userList) {
             UserDTO userDTO = new UserDTO();

@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.io.*;
 import java.util.*;
 import com.laputa.dao.*;
+import com.laputa.repos.EventRepos;
 import com.laputa.repos.EventUserRepos;
 
 @Slf4j
@@ -18,10 +19,16 @@ import com.laputa.repos.EventUserRepos;
 public class EventServiceTest {
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private EventService eventService;
 
     @Autowired
-    private EventUserRepos repos;
+    private EventUserRepos eventUserRepos;
+
+    @Autowired
+    private EventRepos eventRepos;
 
     private Map<Integer, Integer> getMap(String fileName) {
         Map<Integer, Integer> map = new HashMap<>();
@@ -42,9 +49,9 @@ public class EventServiceTest {
     }
 
     private List<Integer>[] getEUList() {
-        int g_num = 1370;
-        int e_num = 4475;
-        int u_num = 64264;
+        int g_num = 179;
+        int e_num = 2686;
+        int u_num = 40949;
         Map<Integer, Integer> emap = getMap("e_map");
         Map<Integer, Integer> umap = getMap("u_map");
 
@@ -71,17 +78,19 @@ public class EventServiceTest {
     @Test
     public void setMap() {
         Map<Integer, Integer> map = new HashMap<>();
-        File file = new File("dataset/douban/e_map.csv");
+        File file = new File("dataset/douban/g_map.csv");
 
         int idx = 0;
         String line;
         List<Event> eventList = eventService.lists(0, eventService.counts());
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             for (Event event : eventList) {
-                if (map.containsKey(event.getId()))
+                int id = event.getOwnerId();
+                if (map.containsKey(id)) {
                     continue;
-                map.put(event.getId(), idx++);
-                line = event.getId() + "," + map.get(event.getId()) + "\n";
+                }
+                map.put(id, idx++);
+                line = id + "," + map.get(id) + "\n";
                 writer.write(line);
             }
         } catch (IOException e) {
@@ -95,7 +104,7 @@ public class EventServiceTest {
         Map<Integer, Integer> umap = getMap("u_map");
         File file = new File("dataset/douban/events.csv");
 
-        List<EventUser> eventUsers = repos.lists();
+        List<EventUser> eventUsers = eventUserRepos.lists();
 
         String line;
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
@@ -111,10 +120,20 @@ public class EventServiceTest {
     }
 
     @Test
+    public void func() {
+        Set<Integer> set = new HashSet<>();
+        List<Event> eventList = eventService.lists(0, eventService.counts());
+        for (Event event : eventList) {
+            set.add(event.getOwnerId());
+        }
+        System.out.println(set.size());
+    }
+
+    @Test
     public void update() throws IOException {
-        int g_num = 1370;
-        int e_num = 4475;
-        int u_num = 64264;
+        int g_num = 179;
+        int e_num = 2686;
+        int u_num = 40949;
         Map<Integer, Integer> emap = getMap("e_map");
         Map<Integer, Integer> gmap = getMap("g_map");
         List<Integer>[] euList = getEUList();
@@ -149,11 +168,12 @@ public class EventServiceTest {
 
     @Test
     public void setTrainAndTestSet() throws IOException {
-        int g_num = 1370;
-        int e_num = 4475;
-        int u_num = 64264;
+        int g_num = 179;
+        int e_num = 2686;
+        int u_num = 40949;
         Map<Integer, Integer> emap = getMap("e_map");
         Map<Integer, Integer> gmap = getMap("g_map");
+        List<Integer>[] euList = getEUList();
 
         File trainFile = new File("dataset/douban/train.csv");
         File testFile = new File("dataset/douban/test.csv");
@@ -172,9 +192,6 @@ public class EventServiceTest {
                 BufferedWriter test = new BufferedWriter(new FileWriter(testFile))) {
             for (int gidx = 0; gidx < groupEvents.length; gidx++) {
                 List<Event> events = groupEvents[gidx];
-
-                // if (events.size() < 5)
-                //     continue;
 
                 events.sort(Comparator.comparing(e -> e.getBeginTime()));
 

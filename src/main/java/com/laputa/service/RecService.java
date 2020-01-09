@@ -85,8 +85,8 @@ public class RecService {
         return userRepos.countFans(userId);
     }
 
-    public List<User> lists(int start, int count) {
-        return userRepos.lists(start, count);
+    public List<User> lists() {
+        return userRepos.lists();
     }
 
     public List<User> getFols(int userId) {

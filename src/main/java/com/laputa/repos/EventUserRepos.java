@@ -3,6 +3,8 @@ package com.laputa.repos;
 import java.util.List;
 
 import com.laputa.dao.EventUser;
+
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -18,5 +20,8 @@ public interface EventUserRepos {
         @Results({ @Result(column = "id", property = "id"), @Result(column = "event_id", property = "eventId"),
                         @Result(column = "user_id", property = "userId") })
         List<EventUser> lists();
+
+        @Delete("delete from event_user where event_id = #{id}")
+        void deleteById(int id);
 
 }

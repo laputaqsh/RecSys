@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -153,4 +154,8 @@ public interface EventRepos {
             @Result(column = "address", property = "address")
     })
     List<Event> search(String keyWord);
+
+    @Delete("delete from event where id = #{id}")
+    void deleteById(Integer id);
+
 }
