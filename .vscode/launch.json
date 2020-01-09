@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - MY",
+            "request": "launch",
+            "mainClass": "com.laputa.rec.MY",
+            "projectName": "recsys"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - RecApplication",
             "request": "launch",
             "mainClass": "com.laputa.RecApplication",

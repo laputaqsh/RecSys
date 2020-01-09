@@ -18,7 +18,7 @@ class Evaluation {
                 }
             }
         }
-        double p = 1.0 * hit / (Input.g_num * topn);
+        double p = 1.0 * hit / (MInput.g_num * topn);
         double r = 1.0 * hit / sum;
         double f1 = 1.0 * (2 * p * r) / (p + r);
         System.out.print("hit: " + hit);

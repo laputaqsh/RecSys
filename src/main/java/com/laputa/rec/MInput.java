@@ -1,6 +1,6 @@
 package com.laputa.rec;
 
-class Input {
+class MInput {
     static int u_num = 24222;
     static int v_num = 1751;
     static int g_num = 20;

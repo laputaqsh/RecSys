@@ -90,7 +90,7 @@ public class Dataset {
     }
 
     static ArrayList<Integer>[] readTrainOrTestOrGroup(String fileName) {
-        ArrayList<Integer>[] groupEvents = new ArrayList[Input.g_num];
+        ArrayList<Integer>[] groupEvents = new ArrayList[MInput.g_num];
         File file = new File(fileName);
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
@@ -133,7 +133,7 @@ public class Dataset {
     }
 
     static int[][] readLocTime() {
-        int[][] res = new int[Input.v_num][2];
+        int[][] res = new int[MInput.v_num][2];
         File inputFile = new File("dataset/meetup/events.csv");
         BufferedReader reader = null;
         try {
@@ -306,7 +306,7 @@ public class Dataset {
     private static void setDatasetNum() {
         HashSet<Integer> trSet = new HashSet<>();
         HashSet<Integer> teSet = new HashSet<>();
-        try (BufferedReader train = new BufferedReader(new FileReader(Input.trainfile)); BufferedReader test = new BufferedReader(new FileReader(Input.testfile))) {
+        try (BufferedReader train = new BufferedReader(new FileReader(MInput.trainfile)); BufferedReader test = new BufferedReader(new FileReader(MInput.testfile))) {
             String line;
             train.readLine();
             while ((line = train.readLine()) != null) {
@@ -332,9 +332,9 @@ public class Dataset {
         File test = new File("dataset/meetup/test.csv");
         File train2 = new File("dataset/meetup/train2.csv");
         File test2 = new File("dataset/meetup/test2.csv");
-        ArrayList<Integer>[] locEid = new ArrayList[Input.l_num];
+        ArrayList<Integer>[] locEid = new ArrayList[MInput.l_num];
         HashMap<Integer, Integer> transfer = new HashMap<>();
-        int[] eidTime = new int[Input.v_num];
+        int[] eidTime = new int[MInput.v_num];
         String line, content;
         try (BufferedReader reader = new BufferedReader(new FileReader(file)); BufferedReader reader1 = new BufferedReader(new FileReader(file)); BufferedWriter writer = new BufferedWriter(new FileWriter(file2)); BufferedReader trainr = new BufferedReader(new FileReader(train)); BufferedReader testr = new BufferedReader(new FileReader(test)); BufferedWriter trainw = new BufferedWriter(new FileWriter(train2)); BufferedWriter testw = new BufferedWriter(new FileWriter(test2))) {
             reader.readLine();
@@ -387,7 +387,7 @@ public class Dataset {
                     writer.write(item);
                 }
             }
-            ArrayList<Integer>[] tr_t = new ArrayList[Input.g_num];
+            ArrayList<Integer>[] tr_t = new ArrayList[MInput.g_num];
             line = trainr.readLine();
             trainw.write(line + "\n");
             while ((line = trainr.readLine()) != null) {
@@ -406,7 +406,7 @@ public class Dataset {
                     trainw.write(g + "," + e + "\n");
                 }
             }
-            ArrayList<Integer>[] te_t = new ArrayList[Input.g_num];
+            ArrayList<Integer>[] te_t = new ArrayList[MInput.g_num];
             line = testr.readLine();
             testw.write(line + "\n");
             while ((line = testr.readLine()) != null) {

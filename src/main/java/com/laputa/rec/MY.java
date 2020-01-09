@@ -42,7 +42,7 @@ public class MY {
     private static String name = "MY";
 
     public static void main(String[] args) {
-        int c = 2, z = 50, r = 50, topn = 10, iterNum = 50;
+        int c = 2, z = 50, r = 50, topn = 10, iterNum = 20;
         MY my = new MY(c, z, r);
         my.init();
         my.setModel(iterNum);
@@ -170,12 +170,12 @@ public class MY {
 
     private double pm(int v) {
         int c = 0;
-        for (int j = 0; j < Input.v_num; j++) {
+        for (int j = 0; j < MInput.v_num; j++) {
             if (mig[v][j] > mig[v][c]) {
                 c = j;
             }
         }
-        return 1.0 * (mig[v][c] + delta) / (migsum[c] + Input.te_num * delta);
+        return 1.0 * (mig[v][c] + delta) / (migsum[c] + MInput.te_num * delta);
     }
 
     private Set<Integer> getCandEvent() {
@@ -276,9 +276,9 @@ public class MY {
 
     private MY(int c, int z, int r) {
         model = new MModel();
-        trainset = Dataset.readTrainOrTestOrGroup(Input.trainfile);
-        testset = Dataset.readTrainOrTestOrGroup(Input.testfile);
-        groups = Dataset.readTrainOrTestOrGroup(Input.groupfile);
+        trainset = Dataset.readTrainOrTestOrGroup(MInput.trainfile);
+        testset = Dataset.readTrainOrTestOrGroup(MInput.testfile);
+        groups = Dataset.readTrainOrTestOrGroup(MInput.groupfile);
         if (trainset == null || testset == null || groups == null) {
             System.out.println("Dataset is null!");
             return;
@@ -287,9 +287,9 @@ public class MY {
         C = c;
         Z = z;
         R = r;
-        U = Input.u_num;
-        V = Input.v_num;
-        G = Input.g_num;
+        U = MInput.u_num;
+        V = MInput.v_num;
+        G = MInput.g_num;
 
         alpha = 1;
         beta = 0.01;

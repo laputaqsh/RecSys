@@ -77,7 +77,7 @@ public class COM {
                 System.arraycopy(events, 0, reclist[g], 0, topn);
             }
         }
-        for (int g = 0; g < Input.g_num; g++) {
+        for (int g = 0; g < MInput.g_num; g++) {
             for (int i = 0; i < topn; i++) {
                 System.out.print(reclist[g][i] + "\t");
             }
@@ -225,9 +225,9 @@ public class COM {
 
     private COM(int c, int z) {
         model = new CModel();
-        trainset = Dataset.readTrainOrTestOrGroup(Input.trainfile);
-        testset = Dataset.readTrainOrTestOrGroup(Input.testfile);
-        groups = Dataset.readTrainOrTestOrGroup(Input.groupfile);
+        trainset = Dataset.readTrainOrTestOrGroup(MInput.trainfile);
+        testset = Dataset.readTrainOrTestOrGroup(MInput.testfile);
+        groups = Dataset.readTrainOrTestOrGroup(MInput.groupfile);
         if (trainset == null || testset == null || groups == null) {
             System.out.println("Dataset is null!");
             return;
@@ -235,9 +235,9 @@ public class COM {
 
         C = c;
         Z = z;
-        U = Input.u_num;
-        I = Input.v_num;
-        G = Input.g_num;
+        U = MInput.u_num;
+        I = MInput.v_num;
+        G = MInput.g_num;
 
         alpha = 1;
         beta = 0.01;

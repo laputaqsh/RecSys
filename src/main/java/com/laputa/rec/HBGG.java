@@ -37,12 +37,12 @@ public class HBGG {
     private HBGG(int z, int r) {
         Z = z;
         R = r;
-        U = Input.u_num;
-        V = Input.v_num;
-        G = Input.g_num;
-        trainset = Dataset.readTrainOrTestOrGroup(Input.trainfile);
-        testset = Dataset.readTrainOrTestOrGroup(Input.testfile);
-        groups = Dataset.readTrainOrTestOrGroup(Input.groupfile);
+        U = MInput.u_num;
+        V = MInput.v_num;
+        G = MInput.g_num;
+        trainset = Dataset.readTrainOrTestOrGroup(MInput.trainfile);
+        testset = Dataset.readTrainOrTestOrGroup(MInput.testfile);
+        groups = Dataset.readTrainOrTestOrGroup(MInput.groupfile);
         if (trainset == null || testset == null || groups == null) {
             System.out.println("Dataset is null!");
             return;
