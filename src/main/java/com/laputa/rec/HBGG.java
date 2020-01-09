@@ -37,12 +37,12 @@ public class HBGG {
     private HBGG(int z, int r) {
         Z = z;
         R = r;
-        U = MInput.u_num;
-        V = MInput.v_num;
-        G = MInput.g_num;
-        trainset = Dataset.readTrainOrTestOrGroup(MInput.trainfile);
-        testset = Dataset.readTrainOrTestOrGroup(MInput.testfile);
-        groups = Dataset.readTrainOrTestOrGroup(MInput.groupfile);
+        U = Input.u_num;
+        V = Input.v_num;
+        G = Input.g_num;
+        trainset = Dataset.readTrainOrTestOrGroup(Input.trainfile);
+        testset = Dataset.readTrainOrTestOrGroup(Input.testfile);
+        groups = Dataset.readTrainOrTestOrGroup(Input.groupfile);
         if (trainset == null || testset == null || groups == null) {
             System.out.println("Dataset is null!");
             return;
@@ -69,9 +69,25 @@ public class HBGG {
         HBGG hbgg = new HBGG(Z, R);
         hbgg.init();
         HModel model = hbgg.getModel(iterNum);
-        //HModel model = hbgg.readModel();
         int[][] reclist = hbgg.recommend(model, topn);
         Evaluation.evaluate(name, hbgg.testset, reclist, topn);
+    }
+
+    public static Set<Integer>[] getRecs(int topn) {
+        int Z = 50, R = 50, iterNum = 50;
+        HBGG hbgg = new HBGG(Z, R);
+        hbgg.init();
+        HModel model = hbgg.getModel(iterNum);
+        int[][] recs = hbgg.recommend(model, topn);
+        Set<Integer>[] recList = new Set[Input.g_num];
+        for (int gidx = 0; gidx < Input.g_num; gidx++) {
+            Integer[] tmp = new Integer[recs[gidx].length];
+            for (int i = 0; i < tmp.length; i++) {
+                tmp[i] = recs[gidx][i];
+            }
+            recList[gidx] = new HashSet<>(Arrays.asList(tmp));
+        }
+        return recList;
     }
 
     private int[][] recommend(HModel model, int topn) {

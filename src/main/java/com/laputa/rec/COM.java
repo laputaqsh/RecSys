@@ -50,6 +50,23 @@ public class COM {
         Evaluation.evaluate(name, com.testset, reclist, topn);
     }
 
+    public static Set<Integer>[] getRecs(int topn) {
+        int c = 2, z = 50, iterNum = 50;
+        COM com = new COM(c, z);
+        com.init();
+        com.setModel(iterNum);
+        int[][] recs = com.recommend(topn);
+        Set<Integer>[] recList = new Set[Input.g_num];
+        for (int gidx = 0; gidx < Input.g_num; gidx++) {
+            Integer[] tmp = new Integer[recs[gidx].length];
+            for (int i = 0; i < tmp.length; i++) {
+                tmp[i] = recs[gidx][i];
+            }
+            recList[gidx] = new HashSet<>(Arrays.asList(tmp));
+        }
+        return recList;
+    }
+
     private int[][] recommend(int topn) {
         System.out.println("making recommendation...");
         List<Integer> candlist = new ArrayList<>(getCandEvent());
@@ -76,12 +93,6 @@ public class COM {
             for (int v = 0; v < topn; v++) {
                 System.arraycopy(events, 0, reclist[g], 0, topn);
             }
-        }
-        for (int g = 0; g < MInput.g_num; g++) {
-            for (int i = 0; i < topn; i++) {
-                System.out.print(reclist[g][i] + "\t");
-            }
-            System.out.println();
         }
         Dataset.saveScores(name, scores);
         Dataset.saveResults(name, reclist);
@@ -225,9 +236,9 @@ public class COM {
 
     private COM(int c, int z) {
         model = new CModel();
-        trainset = Dataset.readTrainOrTestOrGroup(MInput.trainfile);
-        testset = Dataset.readTrainOrTestOrGroup(MInput.testfile);
-        groups = Dataset.readTrainOrTestOrGroup(MInput.groupfile);
+        trainset = Dataset.readTrainOrTestOrGroup(Input.trainfile);
+        testset = Dataset.readTrainOrTestOrGroup(Input.testfile);
+        groups = Dataset.readTrainOrTestOrGroup(Input.groupfile);
         if (trainset == null || testset == null || groups == null) {
             System.out.println("Dataset is null!");
             return;
@@ -235,9 +246,9 @@ public class COM {
 
         C = c;
         Z = z;
-        U = MInput.u_num;
-        I = MInput.v_num;
-        G = MInput.g_num;
+        U = Input.u_num;
+        I = Input.v_num;
+        G = Input.g_num;
 
         alpha = 1;
         beta = 0.01;

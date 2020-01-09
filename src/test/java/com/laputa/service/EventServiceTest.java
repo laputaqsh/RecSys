@@ -30,6 +30,14 @@ public class EventServiceTest {
     @Autowired
     private EventRepos eventRepos;
 
+    @Autowired
+    private RecService recService;
+
+    @Test
+    public void recFunc() {
+        recService.setRecs();
+    }
+
     private Map<Integer, Integer> getMap(String fileName) {
         Map<Integer, Integer> map = new HashMap<>();
         File file = new File("dataset/douban/" + fileName + ".csv");

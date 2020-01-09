@@ -1,7 +1,6 @@
 package com.laputa.rec;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashSet;
 
 class Evaluation {
@@ -14,18 +13,13 @@ class Evaluation {
             for (int v : reclist[g]) {
                 if (set.contains(v))  {
                     hit++;
-                    System.out.println("g: " + g + ", v: " + v);
+                    //System.out.println("g: " + g + ", v: " + v);
                 }
             }
         }
-        double p = 1.0 * hit / (MInput.g_num * topn);
+        double p = 1.0 * hit / (Input.g_num * topn);
         double r = 1.0 * hit / sum;
         double f1 = 1.0 * (2 * p * r) / (p + r);
-        System.out.print("hit: " + hit);
-        System.out.println("\tsum: " + sum);
-        System.out.print("Precision: " + p);
-        System.out.print("\tRecall: " + r);
-        System.out.println("\tF1: " + f1);
         Dataset.saveEvaluation(name, topn, hit, sum, p, r, f1);
     }
 }

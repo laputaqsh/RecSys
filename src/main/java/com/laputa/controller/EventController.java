@@ -1,7 +1,7 @@
 package com.laputa.controller;
 
 import com.laputa.dao.Event;
-import com.laputa.service.EventService;
+import com.laputa.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,12 +13,11 @@ import java.util.*;
 @Slf4j
 public class EventController {
 
+    @Autowired
     private EventService eventService;
 
     @Autowired
-    public void setEventService(EventService eventService) {
-        this.eventService = eventService;
-    }
+    private RecService recService;
 
     @GetMapping("/list")
     public List<Event> list(@RequestParam(value = "locId", defaultValue = "108288") Integer locId,
@@ -70,16 +69,17 @@ public class EventController {
     public List<Event> recs(@RequestParam(value = "userId", defaultValue = "1015534") Integer id) {
         long startTime = System.currentTimeMillis(); // 获取开始时间
 
-        List<Event> eventList = eventService.lists(0, 100);
-        Random random = new Random();
-        Set<Integer> set = new HashSet<>();
-        while (set.size() < 10) {
-            set.add(random.nextInt(eventList.size()));
-        }
-        List<Event> recList = new ArrayList<>();
-        for (int i : set) {
-            recList.add(eventList.get(i));
-        }
+        // List<Event> eventList = eventService.lists(0, 100);
+        // Random random = new Random();
+        // Set<Integer> set = new HashSet<>();
+        // while (set.size() < 10) {
+        //     set.add(random.nextInt(eventList.size()));
+        // }
+        // List<Event> recList = new ArrayList<>();
+        // for (int i : set) {
+        //     recList.add(eventList.get(i));
+        // }
+        List<Event> recList = recService.getRecs(id);
 
         long endTime = System.currentTimeMillis(); // 获取结束时间
         log.info("展示推荐活动用时：" + (endTime - startTime) + "ms"); // 输出程序运行时间
