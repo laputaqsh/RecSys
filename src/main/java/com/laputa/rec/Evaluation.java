@@ -13,13 +13,16 @@ class Evaluation {
             for (int v : reclist[g]) {
                 if (set.contains(v))  {
                     hit++;
-                    //System.out.println("g: " + g + ", v: " + v);
                 }
             }
         }
         double p = 1.0 * hit / (Input.g_num * topn);
         double r = 1.0 * hit / sum;
         double f1 = 1.0 * (2 * p * r) / (p + r);
-        Dataset.saveEvaluation(name, topn, hit, sum, p, r, f1);
+        System.out.print("hit: " + hit);
+        System.out.println("\tsum: " + sum);
+        System.out.print("Precision: " + p);
+        System.out.print("\tRecall: " + r);
+        System.out.println("\tF1: " + f1);
     }
 }

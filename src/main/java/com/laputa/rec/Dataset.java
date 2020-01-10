@@ -229,7 +229,7 @@ public class Dataset {
 
 
     static void saveResults(String name, int[][] arrs) {
-        File file = new File("src/res/" + name + "_reclist.txt");
+        File file = new File("./res/" + name + "_reclist.txt");
         BufferedWriter writer = null;
         StringBuilder sb;
         try {
@@ -256,7 +256,7 @@ public class Dataset {
     }
 
     static void saveScores(String name, double[][] scores) {
-        File file = new File("src/res/" + name + "_scores.txt");
+        File file = new File("./res/" + name + "_scores.txt");
         StringBuilder sb;
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             for (double[] score : scores) {
@@ -273,7 +273,7 @@ public class Dataset {
     }
 
     static void saveEvaluation(String name, int topn, int hit, int sum, double p, double r, double f1) {
-        File file = new File("src/res/" + name + "_evaluation.txt");
+        File file = new File("./res/" + name + "_evaluation.txt");
         StringBuilder sb = new StringBuilder();
         BufferedWriter writer = null;
         try {

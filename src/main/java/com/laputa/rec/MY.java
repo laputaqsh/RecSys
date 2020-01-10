@@ -83,13 +83,11 @@ public class MY {
                         su += model.gz[g][z] * model.zu[z][u]
                                 * (model.lambda[u][0] * model.zv[z][v] + (1 - model.lambda[u][0]) * model.uv[u][v]);
                     }
-                    System.out.println("su: " + su);
                     s *= su;
                     sr = 0;
                     for (int r = 0; r < R; r++) {
                         sr += model.zr[z][r] * model.rv[r][v] * 100000;
                     }
-                    System.out.println("sr: " + sr);
                     s *= sr;
                 }
                 scores[g][vi] = s * pm(v);
@@ -102,8 +100,8 @@ public class MY {
                 System.arraycopy(events, 0, reclist[g], 0, topn);
             }
         }
-        Dataset.saveScores(name, scores);
-        Dataset.saveResults(name, reclist);
+//        Dataset.saveScores(name, scores);
+//        Dataset.saveResults(name, reclist);
         return reclist;
     }
 
