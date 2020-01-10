@@ -1,5 +1,7 @@
 package com.laputa.rec;
 
+import com.laputa.utils.ResUtil;
+
 import java.util.*;
 
 public class HBGG {
@@ -122,8 +124,9 @@ public class HBGG {
                 System.arraycopy(events, 0, reclist[g], 0, topn);
             }
         }
-        Dataset.saveScores(name, scores);
-        Dataset.saveResults(name, reclist);
+//        Dataset.saveScores(name, scores);
+//        Dataset.saveResults(name, reclist);
+        ResUtil.getRes(name);
         return reclist;
     }
 

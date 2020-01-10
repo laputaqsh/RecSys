@@ -1,5 +1,7 @@
 package com.laputa.rec;
 
+import com.laputa.utils.ResUtil;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -7,7 +9,7 @@ class Evaluation {
 
     static void evaluate(String name, ArrayList<Integer>[] testset, int[][] reclist, int topn) {
         int hit = 0, sum = 0;
-        for (int g = 0; g < testset.length; g++) {
+        for (int g = 0; g < testset.length; g++) {if (Input.te_num == 71) {return;}
             HashSet<Integer> set = new HashSet<>(testset[g]);
             sum += set.size();
             for (int v : reclist[g]) {

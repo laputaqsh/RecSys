@@ -1,5 +1,7 @@
 package com.laputa.rec;
 
+import com.laputa.utils.ResUtil;
+
 import java.util.*;
 
 public class MY {
@@ -15,7 +17,7 @@ public class MY {
     }
 
     private int U, V, G, Z, C, R;
-    private double alpha, beta, eta, eplisilon, gamma, gamma_t, rho, omega, delta;
+    private double alpha, beta, eta, eplisilon, gamma, gamma_t, rho, omega, delta,x;
 
     private int[][] mig;
     private int[] migsum;
@@ -86,7 +88,7 @@ public class MY {
                     s *= su;
                     sr = 0;
                     for (int r = 0; r < R; r++) {
-                        sr += model.zr[z][r] * model.rv[r][v] * 100000;
+                        sr += model.zr[z][r] * model.rv[r][v] * x;
                     }
                     s *= sr;
                 }
@@ -102,6 +104,7 @@ public class MY {
         }
 //        Dataset.saveScores(name, scores);
 //        Dataset.saveResults(name, reclist);
+        ResUtil.getRes(name);
         return reclist;
     }
 
@@ -318,6 +321,7 @@ public class MY {
         eplisilon = 0.2;
         omega = 0.01;
         delta = 0.01;
+        x = 1000;
 
         mig = new int[V][V];
         migsum = new int[V];
