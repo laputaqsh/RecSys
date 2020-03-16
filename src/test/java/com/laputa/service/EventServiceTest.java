@@ -3,13 +3,18 @@ package com.laputa.service;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import org.junit.Assert;
+
 import java.io.*;
 import java.util.*;
 import com.laputa.dao.*;
+import com.laputa.dto.EventDTO;
+import com.laputa.enums.TypeEnum;
 import com.laputa.repos.EventRepos;
 import com.laputa.repos.EventUserRepos;
 
@@ -33,9 +38,52 @@ public class EventServiceTest {
     @Autowired
     private RecService recService;
 
+    @Autowired
+    private EventUserService eventUserService;
+
     @Test
     public void recFunc() {
         recService.setRecs();
+    }
+
+    @Test
+    public void testExists() {
+        int userId = 62838752;
+        int eventId = 31048442;
+        String type = TypeEnum.OWNER.getMsg();
+        Boolean b = eventUserService.exists(userId, eventId, type);
+        Assert.assertTrue(b);
+    }
+
+    @Test
+    public void testInsert() {
+        int userId = 62838752;
+        int eventId = 31048442;
+        String type = TypeEnum.OWNER.getMsg();
+        eventUserService.insert(userId, eventId, type);
+    }
+
+    @Test
+    public void testDelete() {
+        int userId = 62838752;
+        int eventId = 31048442;
+        String type = TypeEnum.OWNER.getMsg();
+        eventUserService.delete(userId, eventId, type);
+    }
+
+    @Test
+    public void resolveError() {
+        List<Event> eventList = eventService.lists(0, 100);
+        List<EventDTO> eventDTOList = new ArrayList<>();
+        for (Event event : eventList) {
+            EventDTO eventDTO = new EventDTO();
+            BeanUtils.copyProperties(event, eventDTO);
+            eventDTO.setId(String.valueOf(event.getId()));
+            eventDTO.setCategory(event.getCategoryName());
+            eventDTO.setTime(event.getTimeStr());
+            eventDTOList.add(eventDTO);
+        }
+        System.out.println(eventDTOList.size());
     }
 
     private Map<Integer, Integer> getMap(String fileName) {

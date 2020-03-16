@@ -12,6 +12,14 @@ create table `user` (
     `alt` varchar(255)
 );
 
+-- type: wish join
+create table `user_event` (
+    `id` int(11) primary key,
+    'user_id' int(11) not null,
+    `event_id` int(11) not null,
+    `type` char(4) not null
+);
+
 -- event
 create table `event` (
     `id` int(11) primary key,

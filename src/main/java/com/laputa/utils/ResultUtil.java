@@ -17,10 +17,11 @@ public class ResultUtil {
         return success(null);
     }
 
-    public static ResultVO failure(ResultEnum resultEnum) {
+    public static ResultVO failure() {
         ResultVO resultVO = new ResultVO();
-        resultVO.setCode(resultEnum.getCode());
-        resultVO.setMsg(resultEnum.getMsg());
+        resultVO.setData(null);
+        resultVO.setCode(ResultEnum.FAILURE.getCode());
+        resultVO.setMsg(ResultEnum.FAILURE.getMsg());
         return resultVO;
     }
 }

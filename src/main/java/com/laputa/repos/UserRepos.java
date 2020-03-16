@@ -29,7 +29,7 @@ public interface UserRepos {
                         @Result(column = "alt", property = "alt") })
         User findById(int userId);
 
-        @Select("select * from user")
+        @Select("select * from user where id >= (select id from event limit 0, 1) limit 100")
         @Results({ @Result(column = "id", property = "id"), @Result(column = "uid", property = "uid"),
                         @Result(column = "name", property = "name"), @Result(column = "type", property = "type"),
                         @Result(column = "avatar", property = "avatar"),

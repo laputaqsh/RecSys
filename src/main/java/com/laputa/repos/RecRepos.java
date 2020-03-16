@@ -12,7 +12,7 @@ public interface RecRepos {
     int counts();
 
     @Select("select event_id from rec_res where group_id = #{groupId}")
-    Set<Integer> findByGroupId(Integer groupId);
+    List<Integer> findByGroupId(Integer groupId);
 
     @Insert("insert into rec_res(group_id, event_id) values(#{groupId}, #{eventId})")
     void insert(int groupId, int eventId);

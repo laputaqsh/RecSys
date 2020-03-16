@@ -20,18 +20,19 @@
                         </div>
                         <div class="form-group">
                             <label>账号</label>
-                            <input name="uid" type="textarea" class="form-control"
+                            <input name="uid" type="text" class="form-control"
                                    value="${(user.uid)!''}"/>
                         </div>
                         <div class="form-group">
                             <label>用户名</label>
-                            <input name="name" type="number" class="form-control"
+                            <input name="name" type="text" class="form-control"
                                    value="${(user.name)!''}"/>
                         </div>
                         <div class="form-group">
-                            <label>头像</label>
-                            <input name="avatar" type="text" class="form-control"
-                                   value="${(user.avatar)!''}"/>
+                            <label>头像</label><br/>
+                            <img height="100" width="100" src="${user.avatar}" alt="${user.alt}">
+                            <#--  <input name="avatar" type="text" class="form-control"
+                                   value="${(user.avatar)!''}"/>  -->
                         </div>
                         <input hidden type="text" name="user" value="${(user.id)!''}">
                         <!--为了修改的时候有id，但不想显示出来-->

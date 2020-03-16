@@ -16,11 +16,9 @@
                         <thead>
                         <tr>
                             <th>用户ID</th>
-                            <th>账号</th>
                             <th>用户名</th>
-                            <th>头像</th>
-                            <th>关注</th>
-                            <th>粉丝</th>
+                            <th>关注数</th>
+                            <th>粉丝数</th>
                             <th colspan="2">操作</th>
                         </tr>
                         </thead>
@@ -29,13 +27,11 @@
                         <#list userPage.content as user>
                             <tr>
                                 <td>${user.id}</td>
-                                <td>${user.uid}</td>
                                 <td>${user.name}</td>
-                                <td><img height="100" width="100" src="${user.avatar}" alt="${user.alt}"></td>
                                 <td>${user.fols}</td>
                                 <td>${user.fans}</td>
-                                <td><a href="/back/user/index?userId=${user.id}">修改</a></td>
-                                <td><a href="/back/user/delete?userId=${user.id}">删除</a></td>
+                                <td><a href="/back/user/index?id=${user.id}">修改</a></td>
+                                <td><a href="/back/user/delete?id=${user.id}">删除</a></td>
                             </tr>
                         </#list>
                         </tbody>
@@ -45,6 +41,7 @@
                 <#--分页-->
                 <div class="col-md-12 column">
                     <ul class="pagination pull-right">
+                        <li><a href="/back/user/index">新增用户</a></li>
                         <#if page lte 1>
                             <li class="disabled"><a href="#">上一页</a></li>
                         <#else>

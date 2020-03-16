@@ -39,6 +39,7 @@ public class BackUserController {
         for (User user : userList) {
             UserDTO userDTO = new UserDTO();
             BeanUtils.copyProperties(user, userDTO);
+            userDTO.setId(String.valueOf(user.getId()));
             userDTO.setFols(userService.countFols(user.getId()));
             userDTO.setFans(userService.countFans(user.getId()));
             userDTOList.add(userDTO);
@@ -53,10 +54,14 @@ public class BackUserController {
     }
 
     @GetMapping("/index")
-    public ModelAndView index(String userId, Map<String, Object> map) {
-        int id = Integer.parseInt(userId.replaceAll(",", ""));
-        User user = userService.findById(id);
-        map.put("user", user);
+    public ModelAndView index(@RequestParam(value = "id", defaultValue = "0") String id, Map<String, Object> map) {
+        User user = userService.findById(Integer.parseInt(id));
+        UserDTO userDTO = new UserDTO();
+        BeanUtils.copyProperties(user, userDTO);
+        userDTO.setId(String.valueOf(user.getId()));
+        userDTO.setFols(userService.countFols(user.getId()));
+        userDTO.setFans(userService.countFans(user.getId()));
+        map.put("user", userDTO);
         return new ModelAndView("user/index", map);
     }
 }

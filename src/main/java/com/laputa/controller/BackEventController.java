@@ -1,10 +1,12 @@
 package com.laputa.controller;
 
 import com.laputa.dao.Event;
+import com.laputa.dto.EventDTO;
 import com.laputa.service.EventService;
 import com.laputa.utils.ListUtil;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -32,8 +34,17 @@ public class BackEventController {
             @RequestParam(value = "size", defaultValue = "10") Integer size, HttpServletRequest request,
             Map<String, Object> map) {
         List<Event> eventList = eventService.lists(0, 100);
+        List<EventDTO> eventDTOList = new ArrayList<>();
+        for (Event event : eventList) {
+            EventDTO eventDTO = new EventDTO();
+            BeanUtils.copyProperties(event, eventDTO);
+            eventDTO.setId(String.valueOf(event.getId()));
+            eventDTO.setCategory(event.getCategoryName());
+            eventDTO.setTime(event.getTimeStr());
+            eventDTOList.add(eventDTO);
+        }
 
-        Page<Event> eventPage = ListUtil.listConvertToPage(eventList, PageRequest.of(page - 1, size));
+        Page<EventDTO> eventPage = ListUtil.listConvertToPage(eventDTOList, PageRequest.of(page - 1, size));
         map.put("eventPage", eventPage);
         map.put("page", page);
         map.put("size", size);
@@ -42,10 +53,15 @@ public class BackEventController {
     }
 
     @GetMapping("/index")
-    public ModelAndView index(String eventId, Map<String, Object> map) {
-        int id = Integer.parseInt(eventId.replaceAll(",", ""));
-        Event event = eventService.findById(id);
-        map.put("event", event);
+    public ModelAndView index(@RequestParam(value = "id", defaultValue = "0") String id, Map<String, Object> map) {
+        Event event = eventService.findById(Integer.parseInt(id));
+        EventDTO eventDTO = new EventDTO();
+        BeanUtils.copyProperties(event, eventDTO);
+        eventDTO.setId(String.valueOf(event.getId()));
+        eventDTO.setCategory(event.getCategoryName());
+        eventDTO.setTime(event.getTimeStr());
+
+        map.put("event", eventDTO);
         return new ModelAndView("event/index", map);
     }
 }

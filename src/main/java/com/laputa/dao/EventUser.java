@@ -18,4 +18,6 @@ public class EventUser {
 
     private int userId;
 
+    private String type;
+
 }

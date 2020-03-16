@@ -19,19 +19,20 @@
                                    value="${(event.title)!''}"/>
                         </div>
                         <div class="form-group">
-                            <label>内容</label>
-                            <input name="content" type="textarea" class="form-control"
-                                   value="${(event.content)!''}"/>
+                            <label>内容</label><br/>
+                            <textarea rows="10" cols="100">${(event.content)!''}</textarea>
+                            <#--  <input name="content" type="textarea" rows="10" class="form-control"
+                                   value="${(event.content)!''}"/>  -->
                         </div>
                         <div class="form-group">
                             <label>类型</label>
-                            <input name="category" type="number" class="form-control"
+                            <input name="category" type="text" class="form-control"
                                    value="${(event.category)!''}"/>
                         </div>
                         <div class="form-group">
                             <label>开始时间</label>
-                            <input name="timeStr" type="text" class="form-control"
-                                   value="${(event.timeStr)!''}"/>
+                            <input name="time" type="text" class="form-control"
+                                   value="${(event.time)!''}"/>
                         </div>
                         <div class="form-group">
                             <label>地址</label>

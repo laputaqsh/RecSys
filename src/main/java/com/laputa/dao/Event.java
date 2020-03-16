@@ -23,6 +23,8 @@ public class Event {
 
     private String category;
 
+    private String categoryName;
+
     private Date beginTime;
 
     private Date endTime;

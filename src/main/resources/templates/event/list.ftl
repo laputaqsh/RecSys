@@ -17,11 +17,7 @@
                         <tr>
                             <th>活动ID</th>
                             <th>名称</th>
-                            <th>内容</th>
                             <th>类型</th>
-                            <th>开始时间</th>
-                            <th>地址</th>
-                            <th>经纬度</th>
                             <th colspan="2">操作</th>
                         </tr>
                         </thead>
@@ -31,13 +27,9 @@
                             <tr>
                                 <td>${event.id}</td>
                                 <td>${event.title}</td>
-                                <td>${event.content}</td>
                                 <td>${event.category}</td>
-                                <td>${event.timeStr}</td>
-                                <td>${event.address}</td>
-                                <td>${event.geo}</td>
-                                <td><a href="/back/event/index?eventId=${event.id}">修改</a></td>
-                                <td><a href="/back/event/delete?eventId=${event.id}">删除</a></td>
+                                <td><a href="/back/event/index?id=${event.id}">修改</a></td>
+                                <td><a href="/back/event/delete?id=${event.id}">删除</a></td>
                             </tr>
                         </#list>
                         </tbody>
@@ -47,6 +39,7 @@
                 <#--分页-->
                 <div class="col-md-12 column">
                     <ul class="pagination pull-right">
+                        <li><a href="/back/event/index">新增活动</a></li>
                         <#if page lte 1>
                             <li class="disabled"><a href="#">上一页</a></li>
                         <#else>

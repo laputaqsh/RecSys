@@ -4,7 +4,7 @@ import com.laputa.utils.ResUtil;
 
 import java.util.*;
 
-public class MY {
+public class PMGR {
 
     static class MModel {
         double[][] lambda;
@@ -41,23 +41,23 @@ public class MY {
     private ArrayList<Integer>[] trainset;
     private ArrayList<Integer>[] testset;
     private ArrayList<Integer>[] groups;
-    private static String name = "MY";
+    private static String name = "PMGR";
 
     public static void main(String[] args) {
         int c = 2, z = 50, r = 50, topn = 10, iterNum = 50;
-        MY my = new MY(c, z, r);
-        my.init();
-        my.setModel(iterNum);
-        int[][] reclist = my.recommend(topn);
-        Evaluation.evaluate(name, my.testset, reclist, topn);
+        PMGR pmgr = new PMGR(c, z, r);
+        pmgr.init();
+        pmgr.setModel(iterNum);
+        int[][] reclist = pmgr.recommend(topn);
+        Evaluation.evaluate(name, pmgr.testset, reclist, topn);
     }
 
     public static Set<Integer>[] getRecs(int topn) {
         int c = 2, z = 50, r = 50, iterNum = 50;
-        MY my = new MY(c, z, r);
-        my.init();
-        my.setModel(iterNum);
-        int[][] recs = my.recommend(topn);
+        PMGR pmgr = new PMGR(c, z, r);
+        pmgr.init();
+        pmgr.setModel(iterNum);
+        int[][] recs = pmgr.recommend(topn);
         Set<Integer>[] recList = new Set[Input.g_num];
         for (int gidx = 0; gidx < Input.g_num; gidx++) {
             Integer[] tmp = new Integer[recs[gidx].length];
@@ -102,8 +102,6 @@ public class MY {
                 System.arraycopy(events, 0, reclist[g], 0, topn);
             }
         }
-//        Dataset.saveScores(name, scores);
-//        Dataset.saveResults(name, reclist);
         ResUtil.getRes(name);
         return reclist;
     }
@@ -295,7 +293,7 @@ public class MY {
         }
     }
 
-    public MY(int c, int z, int r) {
+    public PMGR(int c, int z, int r) {
         model = new MModel();
         trainset = Dataset.readTrainOrTestOrGroup(Input.trainfile);
         testset = Dataset.readTrainOrTestOrGroup(Input.testfile);

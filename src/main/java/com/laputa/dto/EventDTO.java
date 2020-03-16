@@ -9,15 +9,17 @@ import lombok.Data;
 @Data
 public class EventDTO {
 
-    private String eventId;
+    private String id;
 
-    private String hostName;
+    private String title;
 
-    private String eventName;
+    private String content;
 
-    private String eventTime;
+    private String category;
 
-    private String eventRegion;
+    private String time;
 
-    private String eventContent;
+    private String address;
+
+    private String geo;
 }
